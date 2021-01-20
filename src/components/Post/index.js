@@ -1,5 +1,11 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableWithoutFeedback, Image} from 'react-native';
+import React, {useState, useCallback} from 'react';
+import {
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import Video from 'react-native-video';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -8,12 +14,21 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import styles from './styles';
 
-const Post = () => {
+const Post = (props) => {
+  const {post} = props;
   const [paused, setPaused] = useState(false);
+  const [isLiked, setisLiked] = useState(false);
+  const [currentPost, setCurrentPost] = useState(post);
   const onPlayPausePress = () => {
     setPaused(!paused);
   };
+  console.log('rendered');
+  const onLikePress = () => {
+    const likedToAdd = isLiked ? -1 : 1;
 
+    setCurrentPost({...currentPost, likes: currentPost.likes + likedToAdd});
+    setisLiked(!isLiked);
+  };
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPlayPausePress}>
@@ -21,8 +36,7 @@ const Post = () => {
           <Video
             style={styles.video}
             source={{
-              uri:
-                'https://tiktokbucket.s3-ap-southeast-1.amazonaws.com/pexels-anastasia-shuraeva-6013206.mp4',
+              uri: currentPost.videoUri,
             }}
             resizeMode={'cover'}
             onError={(e) => console.log(e)}
@@ -34,45 +48,48 @@ const Post = () => {
               <Image
                 style={styles.profilePicture}
                 source={{
-                  uri:
-                    'https://media-exp1.licdn.com/dms/image/C5603AQGny5SpwxHumw/profile-displayphoto-shrink_800_800/0/1599634941866?e=1616630400&v=beta&t=5kQxrr6H-TuQa_AyK7wIuHsoSIvk-DzsckPSfREJvRc',
+                  uri: currentPost.user.imageUri,
                 }}
               />
-
-              <View style={styles.iconContainer}>
-                <AntDesign name={'hearto'} size={40} color="white" />
-                <Text style={styles.statsLabel}>123</Text>
-              </View>
+              <TouchableOpacity onPress={onLikePress}>
+                <View style={styles.iconContainer}>
+                  <AntDesign
+                    name={'heart'}
+                    size={40}
+                    color={isLiked ? 'red' : 'white'}
+                  />
+                  <Text style={styles.statsLabel}>{currentPost.likes}</Text>
+                </View>
+              </TouchableOpacity>
 
               <View style={styles.iconContainer}>
                 <FontAwesome name={'commenting'} size={40} color="white" />
-                <Text style={styles.statsLabel}>123</Text>
+                <Text style={styles.statsLabel}>{currentPost.comments}</Text>
               </View>
 
               <View style={styles.iconContainer}>
                 <Fontisto name={'share-a'} size={35} color="white" />
-                <Text style={styles.statsLabel}>123</Text>
+                <Text style={styles.statsLabel}>{currentPost.shares}</Text>
               </View>
             </View>
 
             <View style={styles.bottomContainer}>
               <View>
-                <Text style={styles.username}>@yhchan0918</Text>
+                <Text style={styles.username}>{currentPost.user.username}</Text>
                 <Text style={styles.description}>
-                  haahhaahahahhaa this is cool
+                  {currentPost.description}
                 </Text>
 
                 <View style={styles.songRow}>
                   <Entypo name={'beamed-note'} size={24} color="white" />
-                  <Text style={styles.songName}>Nf- The search</Text>
+                  <Text style={styles.songName}>{currentPost.songName}</Text>
                 </View>
               </View>
 
               <Image
                 style={styles.songImage}
                 source={{
-                  uri:
-                    'https://media-exp1.licdn.com/dms/image/C5603AQGny5SpwxHumw/profile-displayphoto-shrink_800_800/0/1599634941866?e=1616630400&v=beta&t=5kQxrr6H-TuQa_AyK7wIuHsoSIvk-DzsckPSfREJvRc',
+                  uri: currentPost.songImage,
                 }}
               />
             </View>

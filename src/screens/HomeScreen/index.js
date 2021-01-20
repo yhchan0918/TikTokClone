@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Post from '../../components/Post';
+import posts from '../../data/posts';
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Post />
+      <Post post={posts[0]} />
     </View>
   );
 };
