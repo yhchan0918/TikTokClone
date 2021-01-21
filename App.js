@@ -8,14 +8,15 @@
 
 import React from 'react';
 import {SafeAreaView, StatusBar, StyleSheet, Dimensions} from 'react-native';
-import HomeScreen from './src/screens/HomeScreen';
+import 'react-native-gesture-handler';
+import RootNavigation from './src/navigation';
 
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
       <SafeAreaView style={styles.container}>
-        <HomeScreen />
+        <RootNavigation />
       </SafeAreaView>
     </>
   );
@@ -24,6 +25,7 @@ const App: () => React$Node = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'black',
   },
 });
 

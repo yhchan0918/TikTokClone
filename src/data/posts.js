@@ -2,7 +2,7 @@ export default [
   {
     id: 'p1',
     videoUri:
-      'https://tiktokbucket.s3-ap-southeast-1.amazonaws.com/pexels-anastasia-shuraeva-6013206.mp4',
+      'https://player.vimeo.com/external/484827587.sd.mp4?s=8243d26e48ac4d44cc0499f58c92f60cb8b80204&profile_id=165&oauth2_token_id=57447761',
     user: {
       id: 'u1',
       username: '@yhchan0918',
@@ -21,7 +21,7 @@ export default [
   {
     id: 'p2',
     videoUri:
-      'https://tiktokbucket.s3-ap-southeast-1.amazonaws.com/production+ID_4057150.mp4',
+      'https://player.vimeo.com/external/403270649.sd.mp4?s=e43d1030b321cf7dcc7641ce05dfa5af650f212b&profile_id=165&oauth2_token_id=57447761',
     user: {
       id: 'u1',
       username: 'KIDIIN',

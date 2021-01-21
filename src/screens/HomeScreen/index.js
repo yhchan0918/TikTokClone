@@ -5,13 +5,13 @@ import posts from '../../data/posts';
 
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={posts}
         renderItem={({item}) => <Post post={item} />}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
-        snapToInterval={Dimensions.get('window').height}
+        snapToInterval={Dimensions.get('window').height - 130}
         snapToAlignment={'start'}
         decelerationRate={'fast'}
       />
@@ -19,9 +19,4 @@ const HomeScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 export default HomeScreen;
