@@ -10,7 +10,7 @@ export default [
         'https://media-exp1.licdn.com/dms/image/C5603AQGny5SpwxHumw/profile-displayphoto-shrink_800_800/0/1599634941866?e=1616630400&v=beta&t=5kQxrr6H-TuQa_AyK7wIuHsoSIvk-DzsckPSfREJvRc',
     },
     description: 'Love it',
-    songName: 'YT - Broken Heart',
+    songName: 'JT - Broken Heart',
     songImage:
       'https://media-exp1.licdn.com/dms/image/C5603AQGny5SpwxHumw/profile-displayphoto-shrink_800_800/0/1599634941866?e=1616630400&v=beta&t=5kQxrr6H-TuQa_AyK7wIuHsoSIvk-DzsckPSfREJvRc',
     likes: 123,
