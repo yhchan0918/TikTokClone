@@ -3,7 +3,6 @@ import {View, FlatList, Dimensions} from 'react-native';
 import {API, graphqlOperation} from 'aws-amplify';
 
 import Post from '../../components/Post';
-import posts from '../../data/posts';
 import {listPosts} from '../../graphql/queries';
 
 const HomeScreen = () => {

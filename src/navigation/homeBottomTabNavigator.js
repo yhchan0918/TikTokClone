@@ -8,6 +8,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import tiktokPlusIcon from '../assets/images/tiktok-plus-icon.png';
 import HomeScreen from '../screens/HomeScreen';
+import CameraScreen from '../screens/CameraScreen';
+import SearchScreen from '../screens/SearchScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +33,7 @@ const HomeBottomTabNavigator = () => {
       />
       <Tab.Screen
         name={'Search'}
-        component={() => <Text>Search</Text>}
+        component={SearchScreen}
         options={{
           tabBarIcon: ({color}) => (
             <Feather name={'search'} size={24} color={color} />
@@ -40,7 +42,7 @@ const HomeBottomTabNavigator = () => {
       />
       <Tab.Screen
         name={'Upload'}
-        component={HomeScreen}
+        component={CameraScreen}
         options={{
           tabBarIcon: () => (
             <Image
