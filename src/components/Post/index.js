@@ -22,11 +22,15 @@ const Post = (props) => {
   const onPlayPausePress = () => {
     setPaused(!paused);
   };
-  console.log('rendered');
+
   const onLikePress = () => {
     const likedToAdd = isLiked ? -1 : 1;
 
-    setCurrentPost({...currentPost, likes: currentPost.likes + likedToAdd});
+    setCurrentPost({
+      ...currentPost,
+      numOfLikes: currentPost.numOfLikes + likedToAdd,
+    });
+
     setisLiked(!isLiked);
   };
   return (
@@ -58,18 +62,22 @@ const Post = (props) => {
                     size={40}
                     color={isLiked ? 'red' : 'white'}
                   />
-                  <Text style={styles.statsLabel}>{currentPost.likes}</Text>
+                  <Text style={styles.statsLabel}>
+                    {currentPost.numOfLikes}
+                  </Text>
                 </View>
               </TouchableOpacity>
 
               <View style={styles.iconContainer}>
                 <FontAwesome name={'commenting'} size={40} color="white" />
-                <Text style={styles.statsLabel}>{currentPost.comments}</Text>
+                <Text style={styles.statsLabel}>
+                  {currentPost.numOfComments}
+                </Text>
               </View>
 
               <View style={styles.iconContainer}>
                 <Fontisto name={'share-a'} size={35} color="white" />
-                <Text style={styles.statsLabel}>{currentPost.shares}</Text>
+                <Text style={styles.statsLabel}>{currentPost.numOfShares}</Text>
               </View>
             </View>
 
@@ -82,14 +90,14 @@ const Post = (props) => {
 
                 <View style={styles.songRow}>
                   <Entypo name={'beamed-note'} size={24} color="white" />
-                  <Text style={styles.songName}>{currentPost.songName}</Text>
+                  <Text style={styles.songName}>{currentPost.song.name}</Text>
                 </View>
               </View>
 
               <Image
                 style={styles.songImage}
                 source={{
-                  uri: currentPost.songImage,
+                  uri: currentPost.song.imageUri,
                 }}
               />
             </View>
