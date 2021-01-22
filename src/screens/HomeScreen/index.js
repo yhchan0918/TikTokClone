@@ -40,7 +40,9 @@ const HomeScreen = () => {
     };
     fetchUser();
   }, []);
+
   const [posts, setPosts] = useState([]);
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {

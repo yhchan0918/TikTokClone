@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import {Storage} from 'aws-amplify';
 
 import styles from './styles';
 
@@ -19,6 +20,7 @@ const Post = (props) => {
   const [paused, setPaused] = useState(false);
   const [isLiked, setisLiked] = useState(false);
   const [currentPost, setCurrentPost] = useState(post);
+  const [videoUri, setVideoUri] = useState(null);
   const onPlayPausePress = () => {
     setPaused(!paused);
   };
@@ -33,6 +35,17 @@ const Post = (props) => {
 
     setisLiked(!isLiked);
   };
+  const getVideoUri = async () => {
+    if (currentPost.videoUri.startsWith('http')) {
+      setVideoUri(currentPost.videoUri);
+      return;
+    }
+
+    setVideoUri(await Storage.get(currentPost.videoUri));
+  };
+  useEffect(() => {
+    getVideoUri();
+  }, []);
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPlayPausePress}>
@@ -40,7 +53,7 @@ const Post = (props) => {
           <Video
             style={styles.video}
             source={{
-              uri: currentPost.videoUri,
+              uri: videoUri,
             }}
             resizeMode={'cover'}
             onError={(e) => console.log(e)}
