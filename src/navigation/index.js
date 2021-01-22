@@ -10,7 +10,7 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="CreatePost"
+        initialRouteName="Home"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeBottomTabNavigator} />
         <Stack.Screen

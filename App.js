@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {Auth, API, graphqlOperation} from 'aws-amplify';
 import 'react-native-gesture-handler';
@@ -15,15 +15,19 @@ import {withAuthenticator} from 'aws-amplify-react-native';
 import RootNavigation from './src/navigation';
 import {createUser} from './src/graphql/mutations';
 import {getUser} from './src/graphql/queries';
+import {AuthContext, AuthProvider} from './src/context/auth';
 
 const App: () => React$Node = () => {
+  const {login} = useContext(AuthContext);
   useEffect(() => {
     const fetchUser = async () => {
       // get current authenticated user
       const userInfo = await Auth.currentAuthenticatedUser({bypassCache: true});
+
       if (!userInfo) {
         return;
       }
+      login(userInfo);
       // check if the user exist in database
       const getUserResponse = await API.graphql(
         graphqlOperation(getUser, {id: userInfo.attributes.sub}),
@@ -49,7 +53,9 @@ const App: () => React$Node = () => {
     <>
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={styles.container}>
-        <RootNavigation />
+        <AuthProvider>
+          <RootNavigation />
+        </AuthProvider>
       </SafeAreaView>
     </>
   );
